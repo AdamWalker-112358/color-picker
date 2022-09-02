@@ -13,21 +13,35 @@
         <li class="color color1" ></li>
         <li class="color color2" ></li>
         <li class="color color3" ></li>
-        <li class="color color4" </li>
-        <li class="color color5" </li>
-        <li class="color color6" </li>
+        <li class="color color4" ></li> 
+        <li class="color color5" ></li> 
+        <li class="color color6" ></li> 
       </ul>
       <div class="selected_color">Selected Color</div>
     </div>
     <script>
 
+      const extraColors = 'DarkOrange,DarkBlue,DarkOrchid,DarkGreen,Crimson,Gold'.split(',');
       var selectedColorPreview = document.querySelector(".selected_color");
       var colorPalette = document.querySelector('.colors-box');
-      
+
+      // for (var color of extraColors){
+      //   // create element
+      //   var element = document.createElement('li')
+      //   element.classList.add('color')
+      //   element.style.backgroundColor = color;
+        
+      //   // append element to color palette
+      //   colorPalette.appendChild(element);
+      // }
+
+      let html = extraColors.map( color => `<li class='color' style="background-color: ${color}"></li>`).join(' ');
+      colorPalette.innerHTML += html;
+
       colorPalette.addEventListener('click', setColor);
 
       function setColor(event) {
-        if (event.target.tagName != 'LI') return
+        if (event.target.tagName.toLowerCase() != 'li') return
         let selectedColor = window.getComputedStyle(event.target).backgroundColor
         selectedColorPreview.style.backgroundColor = selectedColor;
         console.log({'event': event.target})
